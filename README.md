@@ -24,3 +24,11 @@ If you are new to component performance testing, I would suggest reading the fol
 - https://stackify.com/ultimate-guide-performance-testing-and-software-testing/
 
 Simply put, a component test limits the scope of the exercised software to a portion of the system under test, manipulating the system through internal code interfaces and using test doubles to isolate the code under test from other components (Ref: https://martinfowler.com/articles/microservice-testing/#testing-component-introduction).
+
+Solution
+The solution is to run the entire test setup as a multi-container Docker application, managed by Docker Compose, with three separate containers running JMeter, Grafana and InfluxDB respectively.
+
+Some constraints that we consider while designing and implementing this solution are:
+- the solution must allow users to specify the url of the app they want to put load on
+- the solution should be lightweight and resource-efficient
+- the solution should be intuitive and user-friendly
