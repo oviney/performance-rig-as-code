@@ -60,9 +60,11 @@ This section will outline the various engineering decisions made.
 ## Why Docker
 
 **Reproducibility:** running a set of Docker containers is guaranteed to produce the same results every time with no possibility of random error. This is very important in testing, since tests are meant to be run repeatedly with controlled variability.
+
 **Installed dependencies:** this performance testing solution requires many things to be installed, key among them JMeter, InfluxDB and Grafana software. Docker containers, which package all the software and dependencies together, seem to be a good fit.
 
 ## Why a multi-container Docker solution?
 Splitting out the various applications into individual containers is the recommended approach, as opposed to running multiple services in a single Docker container.  The multi-container approach makes it much easier to update/scale individual components.
+
 **Scalability:** the multi-container approach allows us to define a different number of containers for each service, something that cannot be easily accomplished if the services are all running inside a single container.  The multi-container approach allows you to isolate when updating or restarting a service, rather than having to restart the entire application / container.
 
