@@ -13,3 +13,14 @@ While JMeter + InfluxDB + Grafana is already a widely-used performance testing s
 - create a database in InfluxDB to store JMeter results
 - add an InfluxDB datasource to Grafana and specify the host and port of the running InfluxDB service
 - create a dashboard in Grafana and query the InfluxDB data to visualize the JMeter test results
+
+In order to automate this tedious and error-prone process, we will implemented a solution that automates the entire setup, so that users who want to use the JMeter + InfluxDB + Grafana setup to conduct performance testing can do so with a single command.  The target use case for this workshop is to demonstrate how to use this setup in-sprint to provide component performance testing.
+
+If you are new to component performance testing, I would suggest reading the following reference links:
+
+- https://martinfowler.com/articles/microservice-testing/ (This one is my favorite)
+- https://dzone.com/articles/improving-app-performance-with-isolated-component
+- https://smartbear.com/blog/test-and-monitor/7-types-of-web-performance-tests-and-how-they-fit/
+- https://stackify.com/ultimate-guide-performance-testing-and-software-testing/
+
+Simply put, a component test limits the scope of the exercised software to a portion of the system under test, manipulating the system through internal code interfaces and using test doubles to isolate the code under test from other components (Ref: https://martinfowler.com/articles/microservice-testing/#testing-component-introduction).
