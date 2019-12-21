@@ -59,3 +59,8 @@ This section will outline the various engineering decisions made.
 
 ## Why Docker
 
+**Reproducibility:** running a set of Docker containers is guaranteed to produce the same results every time with no possibility of random error. This is very important in testing, since tests are meant to be run repeatedly with controlled variability.
+**Installed dependencies:** this performance testing solution requires many things to be installed, key among them JMeter, InfluxDB and Grafana software. Docker containers, which package all the software and dependencies together, seem to be a good fit.
+
+## Why a multi-container Docker solution?
+
