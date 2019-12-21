@@ -3,7 +3,7 @@ An example of how to build performance test infra on demand.
 
 In this workshop, we'll explore how to use a popular open source performance testing solution JMeter + InfluxDB + Grafana combo, with JMeter executing the performance tests, InfluxDB storing the test results and Grafana visualizing the results.
 
-Problem Statement
+# Problem Statement
 While JMeter + InfluxDB + Grafana is already a widely-used performance testing suite, preparing the test setup is a complicated and time-consuming process. In order to load test an app (Web, Mobile or Microservice) and see the results displayed in Grafana, we need to:
 
 - install JMeter, Grafana, InfluxDB and run all three services
@@ -53,3 +53,9 @@ Docker is an open-source software that runs software packages called containers,
 - we run the Docker image to start a Docker container, which starts the service
 
 In our case, JMeter, Grafana and InfluxDB all run in separate Docker containers which talk to each other.
+
+# Implementation
+This section will outline the various engineering decisions made.
+
+## Why Docker
+
