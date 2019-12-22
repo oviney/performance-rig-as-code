@@ -74,3 +74,41 @@ Docker Compose is a tool used to configure the services in a multi-container Doc
 Using Docker Compose to manage the containers instead of managing all the containers manually has many advantages, including:
 - ability to build, start and stop all the services of the multi-container application with one command, instead of manually starting/stopping each container
 - ability able to configure all of the application’s services in one place, via the Docker Compose file. This provides a better overview of the entire application and how each service is configured.  Also, thanks to the Docker Compose file we don't need to pass these configurations in as runtime arguments each time we want to run the service / app / containers, which is more tedious and more error-prone
+
+## Sample docker-compose.yml
+
+version: '3'
+  services:        
+    influxdb:                
+      image: influxdb:1.7.9-alpine                
+      environment:                        
+        - INFLUXDB_DB=jmeter        
+    jmeter:                
+      build:                         
+        context: "jmeter"                        
+        args:                                
+          - jmeterVersion=5.2.1                
+      environment:                
+        - JMETER_TEST=performance_test_plan.jmx             
+      depends_on:                        
+        - influxdb        
+    grafana:                
+      build:                        
+        context: "grafana"                
+      ports:                        
+        - "3000:3000"                
+      depends_on:                        
+        - influxdb                        
+        - jmeter
+
+- Docker Compose creates a single network for all of the application’s service’s containers by default, and containers are able to discover other containers by their container name and talk to other containers via this network. This is extremely convenient in this use case because the JMeter container needs to talk to the InfluxDB container to pass test execution result data to the database and Grafana needs to talk to the InfluxDB container to retrieve test results to display. 
+- With the default network created by Docker Compose, we will be able to configure JMeter to send data to InfluxDB by adding a InfluxDBBackendListenerClient to JMeter and specifying the InfluxDB URL as http://influxdb:8086/write?db=jmeter
+- and configure Grafana to retrieve data from InfluxDB by adding an InfluxDB datasource with URL: http://influxdb:8086. Note that we don’t need to know what the ip address of the InfluxDB container is, and can directly send requests to http://influxdb, since by default Docker Compose creates each container with a hostname identical to their container name. This is great news, we can just use the default network created by Docker Compose instead of having to play around with Docker networking
+
+In the next section, we will demonstrate how to build and run this application with and with Docker Compose
+
+*With Docker Compose:*
+- *docker-compose up* to build and run all the services
+- *docker-compose down* to stop all the services
+
+Docker Compose is the option that best satisfies the our requirements, simple commands, the Docker Compose file and default network creation functionality also makes it easier for us to work with.
