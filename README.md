@@ -68,3 +68,9 @@ Splitting out the various applications into individual containers is the recomme
 
 **Scalability:** the multi-container approach allows us to define a different number of containers for each service, something that cannot be easily accomplished if the services are all running inside a single container.  The multi-container approach allows you to isolate when updating or restarting a service, rather than having to restart the entire application / container.
 
+## Why use Docker Compose?
+Docker Compose is a tool used to configure the services in a multi-container Docker application. When using Docker Compose, we still need Dockerfiles for each of the individual containers, and on top of that we also need to write a Compose file in which we configure all of the application’s services, for instance specifying the port-forwarding, build arguments and environment variables of each service. 
+
+Using Docker Compose to manage the containers instead of managing all the containers manually has many advantages, including:
+- ability to build, start and stop all the services of the multi-container application with one command, instead of manually starting/stopping each container
+- ability able to configure all of the application’s services in one place, via the Docker Compose file. This provides a better overview of the entire application and how each service is configured.  Also, thanks to the Docker Compose file we don't need to pass these configurations in as runtime arguments each time we want to run the service / app / containers, which is more tedious and more error-prone
