@@ -113,3 +113,11 @@ In the next section, we will demonstrate how to build and run this application w
 - *docker-compose down* to stop all the services
 
 Docker Compose is the option that best satisfies the our requirements, simple commands, the Docker Compose file and default network creation functionality also makes it easier for us to work with.
+
+## How do we choose the version of the images?
+Most Dockerfiles define a parent image.  The final image that is built from the Dockerfile is the parent image after it has been modified by the instructions in the Dockerfile. There are many images hosted on Docker Hub that can be used as parent images to build on top of.
+For InfluxDB and Grafana, we should chose the official InfluxDB and Grafana Docker images, so that we won't need to install these in the Dockerfile, and since official images are generally better maintained and more secure. 
+
+We should chose the InfluxDB image tagged with alpine in particular because Alpine image variations are more lightweight, and the influxdb:alpine image provided all the functionality we will needed.
+
+There is no official JMeter image on Docker Hub, so we will chose Alpine Linux as the base image, in order to start with the smallest image possible, and manually installed JMeter in the Dockerfile.
