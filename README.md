@@ -76,7 +76,7 @@ Using Docker Compose to manage the containers instead of managing all the contai
 - ability able to configure all of the application’s services in one place, via the Docker Compose file. This provides a better overview of the entire application and how each service is configured.  Also, thanks to the Docker Compose file we don't need to pass these configurations in as runtime arguments each time we want to run the service / app / containers, which is more tedious and more error-prone
 
 ## Sample docker-compose.yml
-
+```shell
 version: '3'
   services:        
     influxdb:                
@@ -100,6 +100,7 @@ version: '3'
       depends_on:                        
         - influxdb                        
         - jmeter
+```
 
 - Docker Compose creates a single network for all of the application’s service’s containers by default, and containers are able to discover other containers by their container name and talk to other containers via this network. This is extremely convenient in this use case because the JMeter container needs to talk to the InfluxDB container to pass test execution result data to the database and Grafana needs to talk to the InfluxDB container to retrieve test results to display. 
 - With the default network created by Docker Compose, we will be able to configure JMeter to send data to InfluxDB by adding a InfluxDBBackendListenerClient to JMeter and specifying the InfluxDB URL as http://influxdb:8086/write?db=jmeter
