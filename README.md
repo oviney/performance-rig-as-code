@@ -144,7 +144,7 @@ example line in default-test-plan.jmx file with JMeter property function reading
 
 ## How to use the rig (MVP)
 
-This is meant to be simple.  In order to try this setup for yourself, follow the steps below.
+This is meant to be simple.  In order to try this setup for yourself, follow the steps below.  You can also check out the following demo of the steps below:  https://youtu.be/r5v8jYnwozw
 
 * git clone - pull down the source
 * docker-compose up - run it
