@@ -121,3 +121,16 @@ For InfluxDB and Grafana, we should chose the official InfluxDB and Grafana Dock
 We should chose the InfluxDB image tagged with alpine in particular because Alpine image variations are more lightweight, and the influxdb:alpine image provided all the functionality we will needed.
 
 There is no official JMeter image on Docker Hub, so we will chose Alpine Linux as the base image, in order to start with the smallest image possible, and manually installed JMeter in the Dockerfile.
+
+# Reference Links
+- Useful article about JMeter and Docker from Blazemeter - https://www.blazemeter.com/blog/make-use-of-docker-with-jmeter-learn-how/
+- Useful article about Docker Containers options for JMeter Users - https://www.blazemeter.com/blog/top-6-docker-images-for-jmeter-users-and-performance-testers/
+- How to Compose the Most Effective Apache JMeter Test Plan - https://dzone.com/articles/tips-and-tricks-to-compose-the-most-effective-apac
+- Various types of Performance Tests and where to apply them - https://smartbear.com/blog/test-and-monitor/7-types-of-web-performance-tests-and-how-they-fit/
+- https://dzone.com/articles/improving-app-performance-with-isolated-component
+- https://ieeexplore.ieee.org/document/7302490
+- https://martinfowler.com/articles/microservice-testing/#testing-component-introduction
+- Learn JMeter - https://www.blazemeter.com/blog/learn-jmeter-for-free-launching-the-jmeter-academy/
+- JMeter Academy - https://www.blazemeter.com/blog/jmeter-academy-advanced-jmeter-course-now-open/
+- JMeter Training - https://www.blazemeter.com/jmeter-training/ 
+- Pre-built Grafana dashboards for JMeter - https://grafana.com/grafana/dashboards/1152
