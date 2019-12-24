@@ -167,6 +167,10 @@ There should be load sent to the URL you specified, you should be able to view t
 http://localhost:3000
 ```
 
+You should see something like the following.
+
+![Sample Grafana JMeter Dashboard](/images/jmeter-grafana-dashboard.png)
+
 ### Extending & Scaling it
 
 This solution is also configurable.  You can use this setup to execute your own JMeter test plan(S) by copying test-plan.jmx into jmeter/test/ and replacing the value of the JMETER_TEST environment variable, which should be *‘default-test-plan.jmx’*, with the name of your new test (*‘your-test-plan.jmx’* in this example) in *docker-compose.yml*.
