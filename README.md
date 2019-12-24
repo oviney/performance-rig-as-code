@@ -122,6 +122,57 @@ We should chose the InfluxDB image tagged with alpine in particular because Alpi
 
 There is no official JMeter image on Docker Hub, so we will chose Alpine Linux as the base image, in order to start with the smallest image possible, and manually installed JMeter in the Dockerfile.
 
+## Performance Tester Configuration
+There are typically many tunables that a performance tester might want to configure when running tests.  The most common examples are URL, number of concurrent users, test duration.  
+
+Sample user.properties
+```shell
+# time it takes for jmeter to start all the threads in seconds
+rampUp=0
+# total number of threads to be executed
+threads=5
+# duration of the running test (in seconds)
+duration=360 
+# url of the web app to put load on
+webUrl=viney.ca
+```
+
+example line in default-test-plan.jmx file with JMeter property function reading value of duration from user.properties:
+```shell
+<stringProp name="ThreadGroup.duration">${__P(duration,1)}</stringProp>
+```
+
+## How to use the rig (MVP)
+
+This is meant to be simple.  In order to try this setup for yourself, follow the steps below.
+
+* git clone - pull down the source
+* docker-compose up - run it
+
+Let's elaborate on each step in the next section.
+
+### Give it a try
+
+```shell
+git clone https://github.com/oviney/performance-rig-as-code.git
+```
+
+What am I running?  The test is a basic HTTP test, hitting the endpoint as configured in the user.properties file (jmeter/test/).  The test will run using the properties defined in this file.  
+```shell
+docker-compose up
+```
+
+There should be load sent to the URL you specified, you should be able to view the results in Grafana at:
+```shell
+http://localhost:3000
+```
+
+### Extending & Scaling it
+
+This solution is also configurable.  You can use this setup to execute your own JMeter test plan(S) by copying test-plan.jmx into jmeter/test/ and replacing the value of the JMETER_TEST environment variable, which should be *‘default-test-plan.jmx’*, with the name of your new test (*‘your-test-plan.jmx’* in this example) in *docker-compose.yml*.
+
+You will notice that the default report is modeled to give you what LoadRunner Controller by default provides.  This is a good standard to start with, but you can easily add any additional metrics.  Just checkout the Grafana docs, and then export your changes (JSON) to grafana/dashboards/.  This is the approach that I followed to tweak the dashboard that I downloaded from https://grafana.com/grafana/dashboards?search=jmeter.
+
 # Reference Links
 - Useful article about JMeter and Docker from Blazemeter - https://www.blazemeter.com/blog/make-use-of-docker-with-jmeter-learn-how/
 - Useful article about Docker Containers options for JMeter Users - https://www.blazemeter.com/blog/top-6-docker-images-for-jmeter-users-and-performance-testers/
